@@ -28,3 +28,21 @@ Barcode: {item['barcode']}
     else:
         print("Error retrieving inventory.")
 
+def view_item():
+
+    item_id = input("Enter Item ID: ")
+
+    response = requests.get(f"{BASE_URL}/inventory/{item_id}")
+
+    if response.status_code == 200:
+
+        item = response.json()
+
+        print("\n===== ITEM DETAILS =====")
+
+        for key, value in item.items():
+            print(f"{key}: {value}")
+
+    else:
+        print("Item not found.")
+
