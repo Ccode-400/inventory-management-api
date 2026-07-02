@@ -50,3 +50,17 @@ def add_item(item):
     inventory.append(item)
 
     return item
+
+def update_item(item_id, updates):
+    """
+    Updates only the fields provided.
+    """
+
+    item = get_item(item_id)
+
+    if item is None:
+        return None
+
+    item.update(updates)
+
+    return item
