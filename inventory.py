@@ -33,3 +33,9 @@ def get_all_items():
     Returns the complete inventory.
     """
     return inventory
+
+def get_item(item_id):
+    for item in inventory:
+        if item["id"] == item_id:
+            return item
+    return None
