@@ -66,3 +66,30 @@ def add_item():
     else:
         print(response.json())
 
+def update_item():
+    item_id = input("Item ID: ")
+    print("\nLeave blank if you don't want to update a field.\n")
+    updates = {}
+    price = input("New Price: ")
+
+    if price:
+        updates["price"] = float(price)
+        stock = input("New Stock: ")
+
+    if stock:
+        updates["stock"] = int(stock)
+        category = input("New Category: ")
+
+    if category:
+        updates["category"] = category
+
+    response = requests.patch(
+        f"{BASE_URL}/inventory/{item_id}",
+        json=updates
+    )
+
+    if response.status_code == 200:
+        print("Item updated successfully.")
+    else:
+        print("Item not found.")
+
