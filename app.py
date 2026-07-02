@@ -105,6 +105,25 @@ def import_product(barcode):
 
     return jsonify(added_item), 201
 
+@app.route("/", methods=["GET"])
+def home():
+
+    return jsonify(
+        {
+            "message": "Inventory Management API",
+            "routes": [
+                "GET /inventory",
+                "GET /inventory/<id>",
+                "POST /inventory",
+                "PATCH /inventory/<id>",
+                "DELETE /inventory/<id>",
+                "GET /search/<barcode>",
+                "POST /import/<barcode>",
+            ],
+        }
+    )
+
+
 
 
 
