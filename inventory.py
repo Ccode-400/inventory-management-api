@@ -52,10 +52,6 @@ def add_item(item):
     return item
 
 def update_item(item_id, updates):
-    """
-    Updates only the fields provided.
-    """
-
     item = get_item(item_id)
 
     if item is None:
@@ -66,10 +62,6 @@ def update_item(item_id, updates):
     return item
 
 def delete_item(item_id):
-    """
-    Removes an item from the inventory.
-    """
-
     item = get_item(item_id)
 
     if item is None:
