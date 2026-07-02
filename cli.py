@@ -118,4 +118,17 @@ def search_api():
     else:
         print("Product not found.")
 
+def import_product():
+    barcode = input("Barcode: ")
+    response = requests.post(
+        f"{BASE_URL}/import/{barcode}"
+    )
+
+    if response.status_code == 201:
+        print("\nProduct imported into inventory!")
+        print(response.json())
+    else:
+        print("Could not import product.")
+
+
 
