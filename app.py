@@ -84,6 +84,27 @@ def search_product(barcode):
 
     return jsonify(product), 200
 
+@app.route("/import/<barcode>", methods=["POST"])
+def import_product(barcode):
+
+    product = fetch_product(barcode)
+
+    if product is None:
+        return jsonify({"error": "Product not found"}), 404
+
+    inventory_item = {
+        "barcode": product["barcode"],
+        "product_name": product["product_name"],
+        "brand": product["brand"],
+        "price": 0.00,
+        "stock": 0,
+        "category": product["category"],
+    }
+
+    added_item = add_item(inventory_item)
+
+    return jsonify(added_item), 201
+
 
 
 
