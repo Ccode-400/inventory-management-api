@@ -64,6 +64,17 @@ def edit_item(item_id):
 
     return jsonify(updated), 200
 
+@app.route("/inventory/<int:item_id>", methods=["DELETE"])
+def remove_item(item_id):
+
+    deleted = delete_item(item_id)
+
+    if not deleted:
+        return jsonify({"error": "Item not found"}), 404
+
+    return jsonify({"message": "Item deleted successfully"}), 200
+
+
 
 
 
