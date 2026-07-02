@@ -46,3 +46,23 @@ def view_item():
     else:
         print("Item not found.")
 
+def add_item():
+    data = {
+        "barcode": input("Barcode: "),
+        "product_name": input("Product Name: "),
+        "brand": input("Brand: "),
+        "price": float(input("Price: ")),
+        "stock": int(input("Stock: ")),
+        "category": input("Category: ")
+    }
+    
+    response = requests.post(
+        f"{BASE_URL}/inventory",
+        json=data
+    )
+
+    if response.status_code == 201:
+        print("\nItem added successfully!\n")
+    else:
+        print(response.json())
+
