@@ -72,3 +72,7 @@ def test_delete_item(client):
 def test_search_product(client):
     response = client.get("/search/737628064502")
     assert response.status_code in [200, 404]
+
+def test_import_product(client):
+    response = client.post("/import/737628064502")
+    assert response.status_code in [201, 404]
