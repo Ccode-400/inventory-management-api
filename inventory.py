@@ -27,3 +27,9 @@ inventory = [
         "category": "Soft Drinks"
     }
 ]
+
+def get_all_items():
+    """
+    Returns the complete inventory.
+    """
+    return inventory
