@@ -23,3 +23,17 @@ def test_fetch_product_success(mock_get):
     assert product["product_name"] == "Organic Almond Milk"
     assert product["brand"] == "Silk"
     assert product["category"] == "Plant-based foods"
+
+@patch("external_api.requests.get")
+def test_fetch_product_not_found(mock_get):
+    mock_response = {
+        "status": 0
+    }
+
+    mock_get.return_value.status_code = 200
+    mock_get.return_value.json.return_value = mock_response
+
+    product = fetch_product("000000000")
+
+    assert product is None
+
