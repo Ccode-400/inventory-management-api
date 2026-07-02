@@ -39,3 +39,14 @@ def get_item(item_id):
         if item["id"] == item_id:
             return item
     return None
+
+def add_item(item):
+    if inventory:
+        new_id = inventory[-1]["id"] + 1
+    else:
+        new_id = 1
+
+    item["id"] = new_id
+    inventory.append(item)
+
+    return item
