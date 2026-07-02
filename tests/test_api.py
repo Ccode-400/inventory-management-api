@@ -47,3 +47,24 @@ def test_create_item(client):
     assert response.status_code == 201
     data = response.get_json()
     assert data["product_name"] == "Bread"
+
+def test_update_item(client):
+    updates = {
+        "price": 8.50,
+        "stock": 100
+    }
+
+    response = client.patch(
+        "/inventory/1",
+        json=updates
+    )
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["price"] == 8.50
+    assert data["stock"] == 100
+
+def test_delete_item(client):
+    response = client.delete("/inventory/2")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["message"] == "Item deleted successfully"
