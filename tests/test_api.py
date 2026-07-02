@@ -29,3 +29,21 @@ def test_get_single_item(client):
 def test_invalid_item(client):
     response = client.get("/inventory/999")
     assert response.status_code == 404
+
+def test_create_item(client):
+    new_item = {
+        "barcode": "123456789",
+        "product_name": "Bread",
+        "brand": "Sunrise",
+        "price": 3.99,
+        "stock": 40,
+        "category": "Bakery"
+    }
+
+    response = client.post(
+        "/inventory",
+        json=new_item
+    )
+    assert response.status_code == 201
+    data = response.get_json()
+    assert data["product_name"] == "Bread"
