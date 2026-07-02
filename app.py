@@ -11,3 +11,10 @@ from inventory import (
 from external_api import fetch_product
 
 app = Flask(__name__)
+
+@app.route("/inventory", methods=["GET"])
+def get_inventory():
+    """
+    Return all inventory items.
+    """
+    return jsonify(get_all_items()), 200
