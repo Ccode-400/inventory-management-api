@@ -1,19 +1,16 @@
-import requests
+import requests # type: ignore
 
 BASE_URL = "http://127.0.0.1:5000"
 
 def view_inventory():
     response = requests.get(f"{BASE_URL}/inventory")
-
     if response.status_code == 200:
         items = response.json()
 
         if not items:
             print("\nInventory is empty.\n")
             return
-
         print("\n===== INVENTORY =====")
-
         for item in items:
             print(f"""
 ID: {item['id']}
@@ -29,20 +26,14 @@ Barcode: {item['barcode']}
         print("Error retrieving inventory.")
 
 def view_item():
-
     item_id = input("Enter Item ID: ")
-
     response = requests.get(f"{BASE_URL}/inventory/{item_id}")
 
     if response.status_code == 200:
-
         item = response.json()
-
         print("\n===== ITEM DETAILS =====")
-
         for key, value in item.items():
             print(f"{key}: {value}")
-
     else:
         print("Item not found.")
 
