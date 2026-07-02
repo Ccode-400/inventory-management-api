@@ -43,4 +43,15 @@ def create_item():
         "category",
     ]
 
+    # Check for missing fields
+    for field in required_fields:
+        if field not in data:
+            return jsonify({"error": f"{field} is required"}), 400
+
+    new_item = add_item(data)
+
+    return jsonify(new_item), 201
+
+
+
 
