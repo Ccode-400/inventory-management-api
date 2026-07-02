@@ -93,3 +93,14 @@ def update_item():
     else:
         print("Item not found.")
 
+def delete_item():
+    item_id = input("Item ID: ")
+    response = requests.delete(
+        f"{BASE_URL}/inventory/{item_id}"
+    )
+
+    if response.status_code == 200:
+        print("Item deleted.")
+    else:
+        print("Item not found.")
+
