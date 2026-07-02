@@ -15,4 +15,25 @@ def fetch_product(barcode):
     """
 
     url = f"{BASE_URL}/{barcode}.json"
+    
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+
+        data = response.json()
+        if data.get("status") == 1:
+
+            product = data.get("product", {})
+
+            return {
+                "barcode": barcode,
+                "product_name": product.get("product_name", "Unknown Product"),
+                "brand": product.get("brands", "Unknown Brand"),
+                "ingredients": product.get("ingredients_text", "Not Available"),
+                "category": product.get("categories", "Unknown"),
+                "image": product.get("image_url", "")
+            }
+
+
+
 
