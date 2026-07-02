@@ -37,3 +37,11 @@ def test_fetch_product_not_found(mock_get):
 
     assert product is None
 
+@patch("external_api.requests.get")
+def test_fetch_product_connection_error(mock_get):
+    mock_get.side_effect = Exception("Connection Error")
+
+    product = fetch_product("737628064502")
+
+    assert product is None
+
