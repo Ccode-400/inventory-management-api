@@ -64,3 +64,17 @@ def update_item(item_id, updates):
     item.update(updates)
 
     return item
+
+def delete_item(item_id):
+    """
+    Removes an item from the inventory.
+    """
+
+    item = get_item(item_id)
+
+    if item is None:
+        return False
+
+    inventory.remove(item)
+
+    return True
