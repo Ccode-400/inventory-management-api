@@ -25,3 +25,17 @@ def test_view_inventory(mock_get):
     mock_get.return_value = mock_response
     cli.view_inventory()
     mock_get.assert_called_once()
+
+@patch("cli.requests.get")
+@patch("builtins.input", return_value="737628064502")
+def test_search_api(mock_input, mock_get):
+    mock_response = Mock()
+    mock_response.status_code = 200
+    mock_response.json.return_value = {
+        "product_name": "Organic Almond Milk",
+        "brand": "Silk"
+    }
+
+    mock_get.return_value = mock_response
+    cli.search_api()
+    mock_get.assert_called_once()
