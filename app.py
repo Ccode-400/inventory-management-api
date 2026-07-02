@@ -29,3 +29,18 @@ def get_inventory_item(item_id):
 
     return jsonify(item), 200
 
+@app.route("/inventory", methods=["POST"])
+def create_item():
+
+    data = request.get_json()
+
+    required_fields = [
+        "barcode",
+        "product_name",
+        "brand",
+        "price",
+        "stock",
+        "category",
+    ]
+
+
