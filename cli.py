@@ -104,3 +104,18 @@ def delete_item():
     else:
         print("Item not found.")
 
+def search_api():
+    barcode = input("Enter Barcode: ")
+    response = requests.get(
+        f"{BASE_URL}/search/{barcode}"
+    )
+
+    if response.status_code == 200:
+        product = response.json()
+        print("\n===== PRODUCT FOUND =====\n")
+        for key, value in product.items():
+            print(f"{key}: {value}")
+    else:
+        print("Product not found.")
+
+
