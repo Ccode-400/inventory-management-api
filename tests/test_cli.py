@@ -53,3 +53,13 @@ def test_import_product(mock_input, mock_post):
     mock_post.return_value = mock_response
     cli.import_product()
     mock_post.assert_called_once()
+
+@patch("cli.requests.delete")
+@patch("builtins.input", return_value="1")
+def test_delete_item(mock_input, mock_delete):
+    mock_response = Mock()
+    mock_response.status_code = 200
+
+    mock_delete.return_value = mock_response
+    cli.delete_item()
+    mock_delete.assert_called_once()
