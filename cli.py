@@ -130,5 +130,61 @@ def import_product():
     else:
         print("Could not import product.")
 
+def menu():
+    while True:
+        print("""
+==============================
+Inventory Management System
+==============================
 
+1. View Inventory
 
+2. View Item
+
+3. Add Item
+
+4. Update Item
+
+5. Delete Item
+
+6. Search OpenFoodFacts
+
+7. Import Product
+
+8. Exit
+
+==============================
+""")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            view_inventory()
+
+        elif choice == "2":
+            view_item()
+
+        elif choice == "3":
+            add_item()
+
+        elif choice == "4":
+            update_item()
+
+        elif choice == "5":
+            delete_item()
+
+        elif choice == "6":
+            search_api()
+
+        elif choice == "7":
+            import_product()
+
+        elif choice == "8":
+            print("Goodbye!")
+            break
+
+        else:
+            print("Invalid choice.\n")
+
+if __name__ == "__main__":
+    menu()
