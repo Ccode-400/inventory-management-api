@@ -38,8 +38,3 @@ def fetch_product(barcode):
 
     except requests.RequestException:
         return None
-
-
-
-
-

@@ -1,12 +1,6 @@
 from flask import Flask, jsonify, request
 
-from inventory import (
-    get_all_items,
-    get_item,
-    add_item,
-    update_item,
-    delete_item,
-)
+from inventory import (get_all_items, get_item, add_item, update_item, delete_item)
 
 from external_api import fetch_product
 
@@ -34,14 +28,7 @@ def create_item():
 
     data = request.get_json()
 
-    required_fields = [
-        "barcode",
-        "product_name",
-        "brand",
-        "price",
-        "stock",
-        "category",
-    ]
+    required_fields = ["barcode", "product_name", "brand", "price", "stock", "category"]
 
     # Check for missing fields
     for field in required_fields:
@@ -125,10 +112,3 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
-
-
