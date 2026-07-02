@@ -3,7 +3,6 @@ from external_api import fetch_product
 
 @patch("external_api.requests.get")
 def test_fetch_product_success(mock_get):
-
     mock_response = {
         "status": 1,
         "product": {
