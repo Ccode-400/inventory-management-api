@@ -33,6 +33,12 @@ def fetch_product(barcode):
                 "category": product.get("categories", "Unknown"),
                 "image": product.get("image_url", "")
             }
+        
+        return None
+
+    except requests.RequestException:
+        return None
+
 
 
 
