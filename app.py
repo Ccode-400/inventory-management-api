@@ -74,6 +74,17 @@ def remove_item(item_id):
 
     return jsonify({"message": "Item deleted successfully"}), 200
 
+@app.route("/search/<barcode>", methods=["GET"])
+def search_product(barcode):
+
+    product = fetch_product(barcode)
+
+    if product is None:
+        return jsonify({"error": "Product not found"}), 404
+
+    return jsonify(product), 200
+
+
 
 
 
