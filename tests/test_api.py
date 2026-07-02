@@ -25,3 +25,7 @@ def test_get_single_item(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["id"] == 1
+
+def test_invalid_item(client):
+    response = client.get("/inventory/999")
+    assert response.status_code == 404
