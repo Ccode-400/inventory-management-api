@@ -1,4 +1,4 @@
-import requests
+import requests # type: ignore
 
 BASE_URL = "https://world.openfoodfacts.org/api/v0/product"
 
@@ -37,4 +37,6 @@ def fetch_product(barcode):
         return None
 
     except requests.RequestException:
+        return None
+    except Exception:
         return None
