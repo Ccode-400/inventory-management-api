@@ -68,3 +68,7 @@ def test_delete_item(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["message"] == "Item deleted successfully"
+
+def test_search_product(client):
+    response = client.get("/search/737628064502")
+    assert response.status_code in [200, 404]
