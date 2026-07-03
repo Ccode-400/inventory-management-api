@@ -109,3 +109,5 @@ function AddItem({ refresh }) {
     </div>
   );
 }
+
+export default AddItem;
