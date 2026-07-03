@@ -3,7 +3,7 @@ import { useState } from "react";
 import UpdateItem from "./UpdateItem";
 
 function InventoryList({ inventory, refresh }) {
-    const [editingItem, setEditingItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const deleteItem = async (id) => {
         const confirmDelete = window.confirm(
