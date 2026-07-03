@@ -1,67 +1,121 @@
-# Inventory Management System REST API
+# Inventory Management System
 
 ## Overview
 
-The Inventory Management System is a Python-based REST API built using Flask. It allows employees to manage inventory through Create, Read, Update, and Delete (CRUD) operations. The application also integrates with the OpenFoodFacts API to retrieve product information using a barcode. A command-line interface (CLI) is included to allow users to interact with the API without using Postman.
+This project is a full-stack Inventory Management System developed using **Python Flask** for the backend and **React (Vite)** for the frontend. It allows administrators to manage inventory items through a REST API, a command-line interface (CLI), and a modern web interface.
 
-# Features
+The system also integrates with the **OpenFoodFacts API** to retrieve product information using a barcode.
 
-* RESTful Flask API
-* Full CRUD functionality
-* Mock inventory database using a Python list
-* OpenFoodFacts API integration
-* Command-Line Interface (CLI)
-* Unit testing using Pytest
-* External API testing using unittest.mock
-* Error handling for invalid requests
-* Well-structured and documented code
+---
+
+## Features
+
+### Backend (Flask REST API)
+
+- View all inventory items
+- View a single inventory item
+- Add new inventory items
+- Update existing inventory items
+- Delete inventory items
+- Search products using the OpenFoodFacts API
+- Import products directly into the inventory
+
+### Frontend (React + Vite)
+
+- Display inventory items
+- Add new inventory items
+- Edit inventory items
+- Delete inventory items
+- Search products by barcode
+- Import products from OpenFoodFacts
+- Automatically refresh inventory after changes
+
+### Command Line Interface
+
+- View inventory
+- Add inventory items
+- Update stock and prices
+- Delete inventory items
+- Search OpenFoodFacts
+- Import products
+
+### Testing
+
+- Flask API endpoint tests
+- CLI tests
+- External API tests using mocked responses
 
 ---
 
 # Technologies Used
 
-* Python 3
-* Flask
-* Requests
-* Pytest
-* unittest.mock
-* Git & GitHub
+## Backend
+
+- Python 3
+- Flask
+- Flask-CORS
+- Requests
+- Pytest
+
+## Frontend
+
+- React
+- Vite
+- Axios
+
+## External API
+
+- OpenFoodFacts API
 
 ---
 
 # Project Structure
 
-```text
+```
 inventory-management-api/
 │
-├── app.py
-├── inventory.py
-├── external_api.py
-├── cli.py
-├── requirements.txt
-├── README.md
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── AddItem.jsx
+│   │   │   ├── InventoryList.jsx
+│   │   │   ├── SearchProduct.jsx
+│   │   │   └── UpdateItem.jsx
+│   │   │
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── index.css
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   └── vite.config.js
 │
-└── tests/
-    ├── test_api.py
-    ├── test_external_api.py
-    └── test_cli.py
+├── tests/
+│   ├── test_api.py
+│   ├── test_cli.py
+│   └── test_external_api.py
+│
+├── app.py
+├── cli.py
+├── external_api.py
+├── inventory.py
+├── requirements.txt
+├── Pipfile
+└── README.md
 ```
 
 ---
 
 # Installation
 
-## 1. Clone the repository
+## Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/inventory-management-api.git
+git clone <YOUR_GITHUB_REPOSITORY_URL>
 ```
-
-Replace **YOUR_USERNAME** with your GitHub username.
-
----
-
-## 2. Navigate into the project
 
 ```bash
 cd inventory-management-api
@@ -69,24 +123,49 @@ cd inventory-management-api
 
 ---
 
+# Backend Setup
 
-## 3. Install dependencies
+Create a virtual environment.
+
+```bash
+python3 -m venv venv
+```
+
+Activate it.
+
+Linux/macOS
+
+```bash
+source venv/bin/activate
+```
+
+Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies.
 
 ```bash
 pip install -r requirements.txt
 ```
 
+or
+
+```bash
+pip install flask flask-cors requests pytest
+```
+
 ---
 
-# Running the Flask API
-
-Start the Flask server by running:
+# Start the Flask Server
 
 ```bash
 python app.py
 ```
 
-The API will be available at:
+The API will run on:
 
 ```
 http://127.0.0.1:5000
@@ -94,187 +173,148 @@ http://127.0.0.1:5000
 
 ---
 
-# Running the CLI
+# Frontend Setup
 
-Open a second terminal while the Flask API is running.
-
-Run:
+Open another terminal.
 
 ```bash
-python cli.py
+cd frontend
 ```
 
-The CLI menu will appear:
+Install dependencies.
+
+```bash
+npm install
+```
+
+Start the React application.
+
+```bash
+npm run dev
+```
+
+The frontend will run on:
 
 ```
-Inventory Management System
-
-1. View Inventory
-2. View Item
-3. Add Item
-4. Update Item
-5. Delete Item
-6. Search OpenFoodFacts
-7. Import Product
-8. Exit
+http://localhost:5173
 ```
 
 ---
 
 # API Endpoints
 
-| Method | Endpoint          | Description                                        |
-| ------ | ----------------- | -------------------------------------------------- |
-| GET    | /                 | Home route                                         |
-| GET    | /inventory        | Retrieve all inventory items                       |
-| GET    | /inventory/<id>   | Retrieve a single inventory item                   |
-| POST   | /inventory        | Add a new inventory item                           |
-| PATCH  | /inventory/<id>   | Update an inventory item                           |
-| DELETE | /inventory/<id>   | Delete an inventory item                           |
-| GET    | /search/<barcode> | Search OpenFoodFacts by barcode                    |
-| POST   | /import/<barcode> | Import a product from OpenFoodFacts into inventory |
+## Inventory
+
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | /inventory | Get all inventory items |
+| GET | /inventory/<id> | Get a single inventory item |
+| POST | /inventory | Add a new item |
+| PATCH | /inventory/<id> | Update an item |
+| DELETE | /inventory/<id> | Delete an item |
 
 ---
 
-# Example API Requests
+## OpenFoodFacts
 
-## Get All Inventory
-
-```
-GET /inventory
-```
-
----
-
-## Get One Item
-
-```
-GET /inventory/1
-```
+| Method | Endpoint | Description |
+|---------|----------|-------------|
+| GET | /search/<barcode> | Search product by barcode |
+| POST | /import/<barcode> | Import product into inventory |
 
 ---
 
-## Add New Item
-
-```
-POST /inventory
-```
-
-Request Body
+# Example JSON
 
 ```json
 {
-    "barcode":"123456789",
-    "product_name":"Bread",
-    "brand":"Sunrise",
-    "price":3.99,
-    "stock":20,
-    "category":"Bakery"
+    "barcode": "737628064502",
+    "product_name": "Organic Almond Milk",
+    "brand": "Silk",
+    "price": 4.99,
+    "stock": 20,
+    "category": "Beverages"
 }
-```
-
----
-
-## Update Item
-
-```
-PATCH /inventory/1
-```
-
-Request Body
-
-```json
-{
-    "price":5.99,
-    "stock":50
-}
-```
-
----
-
-## Delete Item
-
-```
-DELETE /inventory/1
-```
-
----
-
-## Search OpenFoodFacts
-
-```
-GET /search/737628064502
-```
-
----
-
-## Import Product
-
-```
-POST /import/737628064502
 ```
 
 ---
 
 # Running Tests
 
-Run all tests:
+Run all tests.
 
 ```bash
 pytest
 ```
 
-Run a specific test file:
+Run API tests.
 
 ```bash
 pytest tests/test_api.py
 ```
 
-Verbose mode:
+Run CLI tests.
 
 ```bash
-pytest -v
+pytest tests/test_cli.py
+```
+
+Run External API tests.
+
+```bash
+pytest tests/test_external_api.py
 ```
 
 ---
 
-# OpenFoodFacts API
+# CLI Usage
 
-This application uses the OpenFoodFacts API to retrieve product information using a barcode.
+Start the CLI.
 
-Information retrieved includes:
+```bash
+python cli.py
+```
 
-* Product Name
-* Brand
-* Ingredients
-* Category
-* Product Image URL
+Available options include:
 
-If the barcode does not exist or the API is unavailable, the application returns an appropriate error message.
-
----
-
-# Error Handling
-
-The application handles:
-
-* Invalid inventory IDs
-* Missing required fields
-* Product not found
-* API connection failures
-* Invalid user input
+- View Inventory
+- Add Item
+- Update Item
+- Delete Item
+- Search Product
+- Import Product
+- Exit
 
 ---
 
-# Future Improvements
+# Frontend Features
 
-Potential enhancements include:
+- Responsive inventory dashboard
+- Add inventory items
+- Update product information
+- Delete inventory items
+- Search OpenFoodFacts by barcode
+- Import products directly into inventory
+- Automatic inventory refresh
 
-* Replace the mock list with a SQLite or PostgreSQL database.
-* Add user authentication and authorization.
-* Implement product search by name.
-* Add pagination for large inventories.
-* Build a web-based frontend using HTML/CSS/JavaScript or React.
-* Add Docker support for easier deployment.
+---
+
+# External API
+
+This project uses the **OpenFoodFacts API** to retrieve product information.
+
+Example barcode:
+
+```
+737628064502
+```
+
+Returned information includes:
+
+- Product Name
+- Brand
+- Category
+- Ingredients
+- Product Image
 
 ---
