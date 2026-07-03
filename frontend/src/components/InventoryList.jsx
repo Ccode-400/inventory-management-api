@@ -58,3 +58,5 @@ function InventoryList({ inventory, refresh }) {
         </div>
     );
 }
+
+export default InventoryList;
