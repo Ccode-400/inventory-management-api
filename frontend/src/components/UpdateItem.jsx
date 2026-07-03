@@ -89,3 +89,5 @@ function UpdateItem({ item, refresh, onClose }) {
     </div>
   );
 }
+
+export default UpdateItem;
