@@ -33,3 +33,47 @@ function SearchProduct({ refresh }) {
       alert("Failed to import product.");
     }
   };
+
+  return (
+    <div className="search-container">
+      <h2>Search OpenFoodFacts</h2>
+      <input
+        type="text"
+        placeholder="Enter Barcode"
+        value={barcode}
+        onChange={(e) => setBarcode(e.target.value)}
+      />
+      <button onClick={searchProduct}>
+        Search
+      </button>
+      {loading && <p>Searching...</p>}
+      {product && (
+        <div className="product-card">
+          <h3>{product.product_name}</h3>
+          <p>
+            <strong>Brand:</strong> {product.brand}
+          </p>
+          <p>
+            <strong>Category:</strong> {product.category}
+          </p>
+          <p>
+            <strong>Ingredients:</strong>
+            <br />
+            {product.ingredients}
+          </p>
+          {product.image && (
+            <img
+              src={product.image}
+              alt={product.product_name}
+              width="180"
+            />
+          )}
+          <br />
+          <button onClick={importProduct}>
+            Import Product
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
