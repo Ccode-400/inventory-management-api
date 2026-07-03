@@ -77,3 +77,5 @@ function SearchProduct({ refresh }) {
     </div>
   );
 }
+
+export default SearchProduct;
