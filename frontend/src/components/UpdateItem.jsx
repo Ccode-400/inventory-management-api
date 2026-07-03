@@ -7,7 +7,7 @@ function UpdateItem({ item, refresh, onClose }) {
     stock: "",
     category: "",
   });
-  
+
   useEffect(() => {
     if (item) {
       setFormData({
@@ -39,3 +39,53 @@ function UpdateItem({ item, refresh, onClose }) {
       alert("Failed to update item.");
     }
   };
+
+  return (
+    <div className="update-container">
+      <h2>Edit Item</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Price</label>
+        <input
+          type="number"
+          step="0.01"
+          name="price"
+          value={formData.price}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Stock</label>
+
+        <input
+          type="number"
+          name="stock"
+          value={formData.stock}
+          onChange={handleChange}
+          required
+        />
+
+        <label>Category</label>
+
+        <input
+          type="text"
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        />
+
+        <div className="button-group">
+          <button type="submit">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
