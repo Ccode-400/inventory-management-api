@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 from inventory import (get_all_items, get_item, add_item, update_item, delete_item)
 
 from external_api import fetch_product
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/inventory", methods=["GET"])
 def get_inventory():
@@ -25,19 +27,29 @@ def get_inventory_item(item_id):
 
 @app.route("/inventory", methods=["POST"])
 def create_item():
+    try:
+        data = request.get_json()
+        print(data)
 
-    data = request.get_json()
+        required_fields = [
+            "barcode",
+            "product_name",
+            "brand",
+            "price",
+            "stock",
+            "category",
+        ]
 
-    required_fields = ["barcode", "product_name", "brand", "price", "stock", "category"]
+        for field in required_fields:
+            if field not in data:
+                return jsonify({"error": f"{field} is required"}), 400
 
-    # Check for missing fields
-    for field in required_fields:
-        if field not in data:
-            return jsonify({"error": f"{field} is required"}), 400
+        new_item = add_item(data)
+        return jsonify(new_item), 201
 
-    new_item = add_item(data)
-
-    return jsonify(new_item), 201
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/inventory/<int:item_id>", methods=["PATCH"])
 def edit_item(item_id):
