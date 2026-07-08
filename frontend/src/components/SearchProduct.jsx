@@ -13,12 +13,20 @@ function SearchProduct({ refresh }) {
     setLoading(true);
     try {
       const response = await api.get(`/search/${barcode}`);
+      console.log("Axios response:", response);
+      console.log("Response data:", response.data);
       setProduct(response.data);
     } catch (error) {
-      console.error(error);
-      alert("Product not found.");
-      setProduct(null);
-    }
+  console.error("Search error:", error);
+
+  if (error.response) {
+    console.log("Status:", error.response.status);
+    console.log("Data:", error.response.data);
+  }
+
+  alert("Product not found.");
+  setProduct(null);
+}
     setLoading(false);
   };
   const importProduct = async () => {
